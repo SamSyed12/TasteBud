@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.tastebud.login.presentation.LoginScreenUI
 import com.example.tastebud.ui.theme.TasteBudTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,12 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TasteBudTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                }
+                 LoginScreenUI()
             }
         }
     }
