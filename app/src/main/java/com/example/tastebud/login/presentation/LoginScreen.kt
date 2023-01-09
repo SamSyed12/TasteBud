@@ -1,16 +1,17 @@
 package com.example.tastebud.login.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoginScreen() {
@@ -30,26 +31,34 @@ fun LoginScreenUI() {
         var password by remember{
             mutableStateOf("")
         }
+        val focusManager = LocalFocusManager.current
+        val maxChar = 40
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable { focusManager.clearFocus() },
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LoginTextField(
-                modifier = Modifier.padding(10.dp),
+            UsernameTextField(
                 textValue = username,
-                label = "Email",
                 onTextChange = {
-                    username = it
+                    username = it.take(maxChar)
+                    if (it.length > maxChar){
+                        focusManager.moveFocus(FocusDirection.Down)
+                }
                 }
             )
-            LoginTextField(
+            PasswordTextField(
                 textValue = password,
-                label = "Password",
                 onTextChange = {
-                    password = it
-                }
+                    password = it.take(maxChar)
+                    if (it.length > maxChar){
+                        focusManager.clearFocus(true)
+                    }
+                },
+                focusManager = focusManager
             )
         }
     }
