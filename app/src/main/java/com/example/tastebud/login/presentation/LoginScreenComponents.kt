@@ -72,7 +72,7 @@ fun PasswordTextField(
             IconButton(onClick = {showPassword = !showPassword }) {
                 Icon(
                     painter = icon,
-                    contentDescription = "Visibility Toggle",
+                    contentDescription = "Visibility",
                 )
             }
         }

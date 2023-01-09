@@ -78,6 +78,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
 
+    // Icons
+    implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"
+
+
 }
 
 
