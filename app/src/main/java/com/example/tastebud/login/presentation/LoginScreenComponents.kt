@@ -3,6 +3,10 @@ package com.example.tastebud.login.presentation
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
@@ -20,11 +24,11 @@ import com.example.tastebud.ui.theme.Purple700
 @Composable
 fun UsernameTextField(
     textValue: String = "",
-    onTextChange: (String) -> Unit = {}
+    onTextChange: (String) -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
-        modifier = Modifier
-            .padding(10.dp),
+        modifier = modifier,
         value = textValue,
         label = { Text(text = "Email") },
         onValueChange = onTextChange,
@@ -33,12 +37,11 @@ fun UsernameTextField(
             unfocusedBorderColor = Purple700
         ),
         singleLine = true,
-        )
-
-
+    )
 }
 @Composable
 fun PasswordTextField(
+    modifier: Modifier = Modifier,
     textValue: String = "",
     onTextChange: (String) -> Unit = {},
     focusManager: FocusManager
@@ -47,14 +50,11 @@ fun PasswordTextField(
         mutableStateOf(false)
     }
     OutlinedTextField(
+        modifier = modifier,
         value = textValue,
         label = { Text(text = "Password") },
         onValueChange = onTextChange,
         singleLine = true,
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Red,
-            unfocusedBorderColor = Purple700
-        ),
         keyboardActions = KeyboardActions(
             onDone = {
                 focusManager.clearFocus()
@@ -63,15 +63,9 @@ fun PasswordTextField(
         visualTransformation = if (showPassword) VisualTransformation.None
             else PasswordVisualTransformation(),
         trailingIcon = {
-            val icon = if (showPassword) {
-                painterResource(id = R.drawable.ic_baseline_visibility_24)
-            } else {
-                painterResource(id = R.drawable.ic_baseline_visibility_off_24)
-            }
-
             IconButton(onClick = {showPassword = !showPassword }) {
                 Icon(
-                    painter = icon,
+                    imageVector = if (showPassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
                     contentDescription = "Visibility",
                 )
             }

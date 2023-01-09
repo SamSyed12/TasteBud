@@ -1,9 +1,7 @@
 package com.example.tastebud.login.presentation
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
@@ -12,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoginScreen() {
@@ -42,6 +41,9 @@ fun LoginScreenUI() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             UsernameTextField(
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .padding(bottom = 10.dp),
                 textValue = username,
                 onTextChange = {
                     username = it.take(maxChar)
@@ -51,6 +53,7 @@ fun LoginScreenUI() {
                 }
             )
             PasswordTextField(
+                modifier = Modifier.fillMaxWidth(0.7f),
                 textValue = password,
                 onTextChange = {
                     password = it.take(maxChar)
