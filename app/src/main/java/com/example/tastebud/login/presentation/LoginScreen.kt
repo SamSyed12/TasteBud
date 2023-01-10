@@ -2,12 +2,16 @@ package com.example.tastebud.login.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,8 +68,14 @@ fun LoginScreenUI() {
                 },
                 focusManager = focusManager
             )
-            Button(onClick = {  }) {
-
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .fillMaxWidth(0.7f)
+                    .clip(RoundedCornerShape(100.dp))
+            ){
+                Text(text = "Login")
             }
         }
     }
