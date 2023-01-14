@@ -21,6 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
     }
 
     buildTypes {
@@ -62,6 +63,7 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -71,9 +73,29 @@ dependencies {
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-auth'
 
     // Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
 
+    // Icons
+    implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+
+    // Material 3
+    implementation "androidx.compose.material3:material3:1.0.1"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
+
+    // Life-cycle
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
+
+
 }
+
+
