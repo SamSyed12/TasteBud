@@ -1,10 +1,8 @@
 package com.example.tastebud.login.presentation
 
-import com.example.tastebud.login.domain.LoadingStatus
-import com.example.tastebud.login.domain.FirebaseApiResult
-import com.example.tastebud.util.Resource
+import com.example.tastebud.core.util.Resource
 
 data class LoginScreenUiState(
-    val isLoading: LoadingStatus = LoadingStatus.IDLE,
-    val resource: Resource<FirebaseApiResult> = Resource.Success(data = null)
+    val isLoading: Boolean = false,
+    val resource: Resource<Boolean> = Resource.Error(data = null, message = ""),
 )

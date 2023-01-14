@@ -3,6 +3,7 @@ package com.example.tastebud
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,10 +21,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tastebud.login.presentation.LoginScreen
-import com.example.tastebud.navigation.Screen.Login as Login
-import com.example.tastebud.navigation.Screen.MyPage as MyPage
-import com.example.tastebud.navigation.Screen.Home as Home
-import com.example.tastebud.navigation.Screen.Tips as Tips
+import com.example.tastebud.login.presentation.LoginViewModel
+import com.example.tastebud.navigation.Screen.*
 import com.example.tastebud.ui.theme.TasteBudTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,7 +59,11 @@ class MainActivity : ComponentActivity() {
                          startDestination = Login.route
                      ) {
                          composable(Login.route) {
-                             LoginScreen()
+                             val loginViewModel by viewModels<LoginViewModel>()
+                             LoginScreen(
+                                 viewModel = loginViewModel,
+                                 navigateToHome = { navController.navigate(Home.route) }
+                             )
                          }
                          composable(Home.route) {
                              Surface(
