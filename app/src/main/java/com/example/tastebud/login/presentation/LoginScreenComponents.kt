@@ -67,7 +67,10 @@ fun PasswordTextField(
     )
 }
 
-
+enum class LoadingStatus {
+    CURRENTLY_LOADING,
+    IDLE
+}
 
 
 

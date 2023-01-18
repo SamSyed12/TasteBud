@@ -24,11 +24,11 @@ class LoginViewModel : ViewModel() {
             _uiState.update {
                 it.copy(
                     isLoading = false,
-                    resource = response,
+                    response = response,
                 )
             }
             delay(50)
-            _uiState.update { it.copy(resource = Resource.Error(data = null, message = "")) }
+            _uiState.update { it.copy(response = Resource.Error(data = null, message = "")) }
         }
     }
 }

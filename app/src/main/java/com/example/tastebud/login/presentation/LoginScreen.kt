@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -106,14 +105,14 @@ fun LoginScreenUI(
     if (uiState.isLoading) {
         CircularProgressIndicator()
     }
-    when (uiState.resource) {
+    when (uiState.response) {
         is Resource.Success -> {
             navigateToHome()
         }
         is Resource.Error -> {
-            if (uiState.resource.data == false) {
-                Log.d("lol", "${uiState.resource.data}")
-                Toast.makeText(context, "${uiState.resource.message}", Toast.LENGTH_SHORT).show()
+            if (uiState.response.data == false) {
+                Log.d("lol", "${uiState.response.data}")
+                Toast.makeText(context, "${uiState.response.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
