@@ -90,11 +90,9 @@ dependencies {
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
 
     // Life-cycle
-
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha03"
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
-
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha05"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha05"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha05"
 
 }
 

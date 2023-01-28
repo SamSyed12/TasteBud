@@ -4,10 +4,11 @@ import com.example.tastebud.core.util.Resource
 import com.example.tastebud.login.data.firebase_auth.FirebaseAuth
 import com.example.tastebud.login.domain.User
 import com.example.tastebud.login.domain.UserRepository
+import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class UserRepositoryImpl(
+class UserRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : UserRepository {
     var currentUser: User = User()

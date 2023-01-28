@@ -1,6 +1,5 @@
 package com.example.tastebud.login.presentation
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,11 +18,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.tastebud.core.util.Resource
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel,
@@ -35,7 +31,8 @@ fun LoginScreen(
         signIn = { username, password ->
             viewModel.signIn(username, password)
         },
-        navigateToHome = navigateToHome
+        navigateToHome = navigateToHome,
+        onMessageShown = {}
     )
 }
 
@@ -44,7 +41,7 @@ fun LoginScreen(
 @Composable
 fun LoginScreenUI(
     uiState: LoginScreenUiState = LoginScreenUiState(),
-    signIn: (username: String, password: String) -> Unit = {_,_ -> null },
+    signIn: (username: String, password: String) -> Unit = {_,_ -> },
     navigateToHome: () -> Unit = {}
 ) {
     var username by remember{
@@ -105,15 +102,9 @@ fun LoginScreenUI(
     if (uiState.isLoading) {
         CircularProgressIndicator()
     }
-    when (uiState.response) {
-        is Resource.Success -> {
-            navigateToHome()
-        }
-        is Resource.Error -> {
-            if (uiState.response.data == false) {
-                Log.d("lol", "${uiState.response.data}")
-                Toast.makeText(context, "${uiState.response.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
+    if (uiState.showMessage) {
+        Toast.makeText(context, uiState.response.message, Toast.LENGTH_SHORT).show()
+
     }
+
 }

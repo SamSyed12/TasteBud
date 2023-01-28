@@ -3,16 +3,17 @@ package com.example.tastebud.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tastebud.core.util.Resource
-import com.example.tastebud.login.data.UserRepositoryImpl
-import com.example.tastebud.login.data.UserRepositoryProvider
 import com.example.tastebud.login.domain.UserRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
-    private val userRepository: UserRepository = UserRepositoryProvider.userRepository
+class LoginViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginScreenUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -21,17 +22,46 @@ class LoginViewModel : ViewModel() {
         password: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            _uiState.update { it.copy(isLoading = true) }
+            setLoadingState(true)
             val response = userRepository.signIn(username = username, password = password)
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    response = response,
-                )
+            setLoadingState(false)
+            setResponseState(response)
+            when (_uiState.value.response.data) {
+                true -> {
+                    setLoginSuccessful(true)
+                }
+                false -> {
+                    setShowMessage(true)
+                }
+                else -> {}
             }
-            delay(50)
-            _uiState.update { it.copy(response = Resource.Error(data = null, message = "")) }
         }
     }
+
+    private fun setLoadingState(newLoadingState: Boolean) {
+        _uiState.update {
+            it.copy(isLoading = newLoadingState)
+        }
+    }
+
+    private fun setResponseState(newResponseState: Resource<Boolean>) {
+        _uiState.update {
+            it.copy(response = newResponseState)
+        }
+    }
+
+    fun setShowMessage(newShowMessageState: Boolean) {
+        _uiState.update {
+            it.copy(showMessage = newShowMessageState)
+        }
+    }
+
+    private fun setLoginSuccessful(newLoginState: Boolean) {
+        _uiState.update {
+            it.copy( isLoginSuccessful = newLoginState)
+        }
+    }
+
+
 }
 
