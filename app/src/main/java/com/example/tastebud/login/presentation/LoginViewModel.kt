@@ -3,14 +3,16 @@ package com.example.tastebud.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tastebud.core.util.Resource
-import com.example.tastebud.login.data.UserRepository
+import com.example.tastebud.login.data.UserRepositoryImpl
+import com.example.tastebud.login.data.UserRepositoryProvider
+import com.example.tastebud.login.domain.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
-    private val userRepository: UserRepository = UserRepository()
+    private val userRepository: UserRepository = UserRepositoryProvider.userRepository
     private val _uiState = MutableStateFlow(LoginScreenUiState())
     val uiState = _uiState.asStateFlow()
 
