@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TasteBud</string>
+
+<!--    Onboarding-->
+    <string name="taste_bud_title">Taste Bud</string>
+    <string name="get_started">Get Started</string>
+    <string name="prompt_message">Everyone\'s a hidden chef</string>
+
 </resources>
