@@ -32,7 +32,7 @@ fun LoginScreen(
             viewModel.signIn(username, password)
         },
         navigateToHome = navigateToHome,
-        onMessageShown = {}
+        onMessageShown = { viewModel.setShowMessage(false) }
     )
 }
 
@@ -41,6 +41,7 @@ fun LoginScreen(
 @Composable
 fun LoginScreenUI(
     uiState: LoginScreenUiState = LoginScreenUiState(),
+    onMessageShown: () -> Unit = {},
     signIn: (username: String, password: String) -> Unit = {_,_ -> },
     navigateToHome: () -> Unit = {}
 ) {
@@ -104,7 +105,10 @@ fun LoginScreenUI(
     }
     if (uiState.showMessage) {
         Toast.makeText(context, uiState.response.message, Toast.LENGTH_SHORT).show()
-
+        onMessageShown()
+    }
+    if (uiState.isLoginSuccessful) {
+        navigateToHome()
     }
 
 }
